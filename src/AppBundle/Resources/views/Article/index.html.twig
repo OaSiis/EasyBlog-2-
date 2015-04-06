@@ -1,0 +1,35 @@
+{% extends '::layout.html.twig' %}
+
+{% block content -%}
+    <section class="row">
+        <h1>
+            Articles list
+        </h1>
+
+        {% for article in articles %}
+            {% if article.enabled %}
+                <article class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                    <header>
+                        <figure>
+                            <img class="img-responsive" src="{{ article.image }}" alt="picture">
+                            <figcaption>
+                                <h1>{{ article.title }}</h1>
+                            </figcaption>
+                        </figure>
+                    </header>
+                    <p class="break-word">{{ article.content|truncate(150) }}</p>
+                    <footer>
+                        <p>{{ article.createdAt|date }} by {{ article.user }}</p>
+                    </footer>
+                    <aside>
+                        <div class="btn-group" role="group" aria-label="action">
+                            <a href="{{ path('article_show', {'id': article.id}) }}" class="btn btn-warning">
+                                <i class="glyphicon glyphicon-king"></i>Show
+                            </a>
+                        </div>
+                    </aside>
+                </article>
+            {% endif %}
+        {% endfor %}
+    </section>
+{% endblock %}
